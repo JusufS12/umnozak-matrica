@@ -1,6 +1,6 @@
 CC=gcc
 SRC=src
-OUT=build/bin/suma-matrica
+OUT=build/bin/umnozak-matrica
 INC=inc
 OBJ=build/obj
 
