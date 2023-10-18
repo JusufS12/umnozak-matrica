@@ -1,6 +1,25 @@
-CMP=gcc
-SRC_DIR=src
-BUILD_DIR=build
+CC=gcc
+SRC=src
+OUT=build/bin/suma-matrica
+INC=inc
+OBJ=build/obj
 
-$(BUILD_DIR)/suma-matrica: $(SRC_DIR)/main.c
-	$(CMP) $(SRC_DIR)/main.c -o $(BUILD_DIR)/suma-matrica
+
+$(OUT): $(OBJ)/main.o $(OBJ)/matriceio.o
+	$(CC) -o $(OUT) $(OBJ)/main.o $(OBJ)/matriceio.o
+
+
+$(OBJ)/matriceio.o: $(SRC)/matriceio.c $(INC)/matriceio.h
+	$(CC) -Wall -Wextra -std=c17 -c $(SRC)/matriceio.c -o $(OBJ)/matriceio.o
+
+
+$(OBJ)/main.o: $(SRC)/main.c
+	$(CC) -Wall -Wextra -std=c17 -c $(SRC)/main.c -o $(OBJ)/main.o
+
+
+
+clean:
+	rm $(OBJ)/*.o $(OUT)
+
+run:
+	$(OUT)
