@@ -25,15 +25,18 @@ int main(void) {
 	int matrica2[3][3];
 	int umnozak[3][3] = {};
 
-	puts("Unesi prvu matricu:\r\n");
+	puts("Unesi prvu matricu:\n");
 	popuniMatricu(matrica1);
 
-	puts("Unesi drugu matricu:\r\n");
+	puts("Unesi drugu matricu:\n");
 	popuniMatricu(matrica2);
 
+	puts("Prva matrica:\n");
 	prikazMatrice(matrica1);
+	puts("Druga matrica:\n");
 	prikazMatrice(matrica2);
 
+	puts("Umnozak matrica:\n");
 	umnozakMatrica(matrica1, matrica2, umnozak);
 
 	prikazMatrice(umnozak);
