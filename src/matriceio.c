@@ -5,19 +5,10 @@
 
 int unosBroja() {
     // funkcija za unos broja
-    size_t i;
     char broj[10];
     int rezultat = 0;
     fgets(broj, sizeof broj, stdin);
-    for (i = 0; broj[i] != '\0'; ++i) {
-        if ('0' <= broj[i] && broj[i] <= '9') {
-            rezultat *= 10;
-            rezultat += broj[i] - '0';
-        }
-    }
-	if (broj[0] == '-') {
-		rezultat = -rezultat;
-	}
+    rezultat = atoi(broj);
     return rezultat;
 }
 
