@@ -4,29 +4,29 @@
 
 
 int unosBroja() {
-    // funkcija za unos broja
-    char broj[10];
-    int rezultat = 0;
-    fgets(broj, sizeof broj, stdin);
-    rezultat = atoi(broj);
-    return rezultat;
+	// funkcija za unos broja
+	char broj[10];
+	int rezultat = 0;
+	fgets(broj, sizeof broj, stdin);
+	rezultat = atoi(broj);
+	return rezultat;
 }
 
 void grafickiPrikaz(size_t red, size_t stupac) {
 	size_t i;
-	char *point = "V\n";
+	char point = 'V';
 	for (i = 0; i < 3; i++) {
 		if (red == i) {
-			switch (stupac)
-			{
+			switch (stupac) {
+
 			case 0:
-				printf("%s", point);
+				printf("%c\n", point);
 				break;
 			case 1:
-				printf("   %s", point);
+				printf("   %c\n", point);
 				break;
 			case 2:
-				printf("      %s", point);
+				printf("      %c\n", point);
 				break;
 			default:
 			puts("Greska!");
@@ -36,7 +36,8 @@ void grafickiPrikaz(size_t red, size_t stupac) {
 		}
 		puts("[] [] []");
 	}
-	puts("\n");
+	putchar('\n');
+	printf("Unesi poje %ldx%ld: \n", red, stupac);
 }
 
 void popuniMatricu(int mat[3][3]) {
