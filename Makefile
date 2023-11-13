@@ -1,6 +1,6 @@
 CC=gcc
 SRC=src
-OUT=build/bin/umnozak-matrica
+OUT=build/bin/umat
 INC=inc
 OBJ=build/obj
 
@@ -20,6 +20,3 @@ $(OBJ)/main.o: $(SRC)/main.c
 
 clean:
 	rm $(OBJ)/*.o $(OUT)
-
-run:
-	$(OUT)

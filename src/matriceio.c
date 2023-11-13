@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define error(msg, ...) printf("[!] " msg "\n", ##__VA_ARGS__)
+
+
+size_t stN, stM;
 
 int unosBroja() {
 	// funkcija za unos broja
@@ -12,45 +16,75 @@ int unosBroja() {
 	return rezultat;
 }
 
-void grafickiPrikaz(size_t red, size_t stupac) {
-	size_t i;
-	char point = 'V';
-	for (i = 0; i < 3; i++) {
-		if (red == i) {
-			switch (stupac) {
+void pointPrint(size_t stupac) {
+    size_t i;
+    char const point = 'V';
 
-			case 0:
-				printf("%c\n", point);
-				break;
-			case 1:
-				printf("   %c\n", point);
-				break;
-			case 2:
-				printf("      %c\n", point);
-				break;
-			default:
-			puts("Greska!");
-				break;
-			}
-			
+    for (i = 0; i < (stupac * 3); i++) {
+        printf(" ");
+    }
+
+    printf("%c\n", point);
+}
+
+int grafickiPrikaz(size_t red, size_t stupac) {
+
+	size_t i, j;
+
+	if (stN < red || stM < stupac) {
+		error("invalid row and/or column were given when trying to display grafical helper: given number of rows and columns is %ldx%ld, but matrix size is %ldx%ld", red, stupac, stN, stM);
+		return EXIT_FAILURE;
+	}
+
+	putchar('\n');
+	for (i = 0; i < stN; i++) {
+		if (red == i) {
+			pointPrint(stupac);
 		}
-		puts("[] [] []");
+		for (j = 0; j < stM; j++) {
+			printf("[] ");
+		}
+		printf("\n");
 	}
 	putchar('\n');
 	printf("Unesi poje %ldx%ld: \n", red, stupac);
+	return EXIT_SUCCESS;
 }
 
-void popuniMatricu(int mat[3][3]) {
+int popuniMatricu(int mat[stN][stM]) {
 	size_t i, j;
-	for (i = 0; i < 3; i++) {
-		for (j = 0; j < 3; j++) {
-			grafickiPrikaz(i, j);
+	for (i = 0; i < stN; i++) {
+		for (j = 0; j < stM; j++) {
+			if (grafickiPrikaz(i, j) != EXIT_SUCCESS) {
+				return EXIT_FAILURE;
+			} 
 			mat[i][j] = unosBroja();
 		}
 	}
+	return EXIT_SUCCESS;
 }
 
-void prikazMatrice(int mat[3][3]) {
-	printf("[%d] [%d] [%d]\n[%d] [%d] [%d]\n[%d] [%d] [%d]\n", mat[0][0], mat[0][1], mat[0][2], mat[1][0], mat[1][1], mat[1][2], mat[2][0], mat[2][1], mat[2][2]);
-	puts("\n");
+void prikazMatrice(int mat[stN][stM]) {
+	size_t i, j;
+	putchar('\n');
+	for (i = 0; i < stN; i++) {
+		for (j = 0; j < stM; j++) {
+			printf("[%d] ", mat[i][j]);
+		}
+		printf("\n");
+	}
+	putchar('\n');
+}
+
+int setMatrixSize(size_t n, size_t m) {
+
+	stN = n;
+	stM = m;
+
+	if(stN <= 0 || stM <= 0) {
+		error("matrix size must be bigger than 0");
+		return EXIT_FAILURE;
+	}
+
+	return EXIT_SUCCESS;
 }

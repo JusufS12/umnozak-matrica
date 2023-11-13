@@ -3,13 +3,13 @@
 #include "../inc/matriceio.h"
 
 
-void umnozakMatrica(int mat1[3][3], int mat2[3][3], int umn[3][3]) {
+void umnozakMatrica(int mat1[stN][stM], int mat2[stN][stM], int umn[stN][stM]) {
 	unsigned int i, j, n, m;
 	int tmp = 0;
-	for (i = 0; i < 3; i++) {
-		for (j = 0; j < 3; j++) {
-			for (n = 0; n < 3; n++) {
-				for (m = 0; m < 3; m++) {
+	for (i = 0; i < stN; i++) {
+		for (j = 0; j < stM; j++) {
+			for (n = 0; n < stN; n++) {
+				for (m = 0; m < stM; m++) {
 					tmp += mat1[i][m] * mat2[m][j];
 				}
 				umn[i][j] = tmp;
@@ -20,10 +20,20 @@ void umnozakMatrica(int mat1[3][3], int mat2[3][3], int umn[3][3]) {
 }
 
 
-int main(void) {
-	int matrica1[3][3];
-	int matrica2[3][3];
-	int umnozak[3][3] = {};
+int main(const int argc, const char* argv[]) {
+
+	if(argc != 2) {
+		puts("usage: umat <number of rows and columns>");
+		return EXIT_FAILURE;
+	}
+
+	if (setMatrixSize(atoi(argv[1]), atoi(argv[1])) != EXIT_SUCCESS) {
+		return EXIT_FAILURE;
+	}
+
+	int matrica1[stN][stM];
+	int matrica2[stN][stM];
+	int umnozak[stN][stM];
 
 	puts("Unesi prvu matricu:\n");
 	popuniMatricu(matrica1);
