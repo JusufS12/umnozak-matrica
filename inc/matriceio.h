@@ -3,6 +3,8 @@
 #ifndef MATRICEIO_H
 #define MATRICEIO_H
 
+#define error(msg, ...) printf("[!] " msg "\n", ##__VA_ARGS__)
+
 //dimenzije matrice
 extern size_t stN, stM;
 
